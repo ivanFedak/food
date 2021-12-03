@@ -2,9 +2,9 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/modules/mdoal.js":
+/***/ "./src/js/modules/modal.js":
 /*!*********************************!*\
-  !*** ./src/js/modules/mdoal.js ***!
+  !*** ./src/js/modules/modal.js ***!
   \*********************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -14,14 +14,10 @@ const modal = () => {
   const modal = document.querySelector('.modal');
   const close = modal.querySelector('[data-close]');
 
-  function openModal(btns) {
-    btns.forEach(btn => {
-      btn.addEventListener('click', function (e) {
-        modal.classList.remove('hide');
-        modal.classList.add('show');
-        document.documentElement.style.overflow = 'hidden';
-      });
-    });
+  function openModal() {
+    modal.classList.remove('hide');
+    modal.classList.add('show');
+    document.documentElement.style.overflow = 'hidden';
   }
 
   function closeModal(e) {
@@ -36,14 +32,18 @@ const modal = () => {
     }
   }
 
-  openModal(btns);
-  close.addEventListener('click', closeModal);
-  document.addEventListener('click', outSide);
-  document.addEventListener('keydown', e => {
+  function closeEsc(e) {
     if (e.code === "Escape" && modal.classList.contains('show')) {
       closeModal();
     }
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', openModal);
   });
+  close.addEventListener('click', closeModal);
+  document.addEventListener('click', outSide);
+  document.addEventListener('keydown', closeEsc);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modal);
@@ -219,7 +219,7 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
-/* harmony import */ var _modules_mdoal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mdoal */ "./src/js/modules/mdoal.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
 
 
 
@@ -227,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
 window.onload = function () {
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])();
   (0,_modules_timer__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  (0,_modules_mdoal__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  (0,_modules_modal__WEBPACK_IMPORTED_MODULE_2__["default"])();
 };
 }();
 /******/ })()
