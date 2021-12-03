@@ -2,6 +2,54 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/mdoal.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/mdoal.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+const modal = () => {
+  const btns = document.querySelectorAll('[data-modal]');
+  const modal = document.querySelector('.modal');
+  const close = modal.querySelector('[data-close]');
+
+  function openModal(btns) {
+    btns.forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        modal.classList.remove('hide');
+        modal.classList.add('show');
+        document.documentElement.style.overflow = 'hidden';
+      });
+    });
+  }
+
+  function closeModal(e) {
+    modal.classList.remove('show');
+    modal.classList.add('hide');
+    document.documentElement.style.overflow = '';
+  }
+
+  function outSide(e) {
+    if (!e.target.closest('.modal__dialog') && !e.target.closest('[data-modal]')) {
+      closeModal();
+    }
+  }
+
+  openModal(btns);
+  close.addEventListener('click', closeModal);
+  document.addEventListener('click', outSide);
+  document.addEventListener('keydown', e => {
+    if (e.code === "Escape" && modal.classList.contains('show')) {
+      closeModal();
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (modal);
+
+/***/ }),
+
 /***/ "./src/js/modules/tabs.js":
 /*!********************************!*\
   !*** ./src/js/modules/tabs.js ***!
@@ -171,12 +219,15 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
+/* harmony import */ var _modules_mdoal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mdoal */ "./src/js/modules/mdoal.js");
+
 
 
 
 window.onload = function () {
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])();
   (0,_modules_timer__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  (0,_modules_mdoal__WEBPACK_IMPORTED_MODULE_2__["default"])();
 };
 }();
 /******/ })()
